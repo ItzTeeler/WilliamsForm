@@ -6,13 +6,13 @@ using System.Security.Cryptography;
 using BackendRedo.Models;
 using BackendRedo.Services.Context;
 using Microsoft.AspNetCore.Mvc;
-using WilliamsForm.Models.DTO;
+using BackendRedo.Models.DTO;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace WilliamsForm.Services
+namespace BackendRedo.Services
 {
     public class UserService : ControllerBase
     {

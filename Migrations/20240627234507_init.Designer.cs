@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendRedo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240627232903_init")]
+    [Migration("20240627234507_init")]
     partial class init
     {
         /// <inheritdoc />

@@ -3,13 +3,13 @@ using BackendRedo.Services;
 using BackendRedo.Services.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using WilliamsForm.Services;
+using BackendRedo.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<FormService>();
-builder.Services.AddScoped<UserService>();
+// builder.Services.AddScoped<UserService>();
 
 var connectionString = builder.Configuration.GetConnectionString("RedoBackend");
 
