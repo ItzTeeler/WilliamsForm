@@ -13,7 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("RedoBackend");
 
 builder.Services.AddCors(options => options.AddPolicy("RedoPolicy", 
 builder => {
-    builder.WithOrigins("http://localhost:5120/", "https://nextjsforms.vercel.app/")
+    builder.WithOrigins("http://localhost:5120/", "https://nextjsforms.vercel.app/", "http://localhost:3000/")
     .AllowAnyHeader()
     .AllowAnyMethod();
 }
