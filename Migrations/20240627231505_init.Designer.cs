@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendRedo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240627201954_init")]
+    [Migration("20240627231505_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -36,21 +36,34 @@ namespace BackendRedo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DOB")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hash")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Lastname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phonenumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
