@@ -45,7 +45,6 @@ namespace BackendRedo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Hash")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Lastname")
@@ -60,7 +59,6 @@ namespace BackendRedo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

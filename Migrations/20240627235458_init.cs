@@ -21,8 +21,8 @@ namespace BackendRedo.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DOB = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
