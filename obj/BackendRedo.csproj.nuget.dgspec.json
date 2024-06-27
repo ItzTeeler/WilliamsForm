@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/Jerrod/Documents/CodeStackAcademy/Level 5/Repositories/WilliamsForm/BackendRedo.csproj": {}
+    "/Users/DocumentsLocal/BackendRedo/BackendRedo.csproj": {}
   },
   "projects": {
-    "/Users/Jerrod/Documents/CodeStackAcademy/Level 5/Repositories/WilliamsForm/BackendRedo.csproj": {
+    "/Users/DocumentsLocal/BackendRedo/BackendRedo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Jerrod/Documents/CodeStackAcademy/Level 5/Repositories/WilliamsForm/BackendRedo.csproj",
+        "projectUniqueName": "/Users/DocumentsLocal/BackendRedo/BackendRedo.csproj",
         "projectName": "BackendRedo",
-        "projectPath": "/Users/Jerrod/Documents/CodeStackAcademy/Level 5/Repositories/WilliamsForm/BackendRedo.csproj",
-        "packagesPath": "/Users/Jerrod/.nuget/packages/",
-        "outputPath": "/Users/Jerrod/Documents/CodeStackAcademy/Level 5/Repositories/WilliamsForm/obj/",
+        "projectPath": "/Users/DocumentsLocal/BackendRedo/BackendRedo.csproj",
+        "packagesPath": "/Users/codestack/.nuget/packages/",
+        "outputPath": "/Users/DocumentsLocal/BackendRedo/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/Jerrod/.nuget/NuGet/NuGet.Config"
+          "/Users/codestack/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
