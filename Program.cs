@@ -3,17 +3,19 @@ using BackendRedo.Services;
 using BackendRedo.Services.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using WilliamsForm.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<FormService>();
+builder.Services.AddScoped<UserService>();
 
 var connectionString = builder.Configuration.GetConnectionString("RedoBackend");
 
 builder.Services.AddCors(options => options.AddPolicy("RedoPolicy", 
 builder => {
-    builder.WithOrigins("http://localhost:5120/")
+    builder.WithOrigins("http://localhost:5120", "https://nextjsforms.vercel.app", "http://localhost:3000")
     .AllowAnyHeader()
     .AllowAnyMethod();
 }
