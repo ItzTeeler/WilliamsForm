@@ -42,6 +42,12 @@ namespace BackendRedo.Services
                 newUser.Email = UserToAdd.Email;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
+                
+                // newUser.Address = UserToAdd.Address;
+                // newUser.DOB = UserToAdd.DOB;
+                // newUser.Firstname = UserToAdd.Firstname;
+                // newUser.Lastname = UserToAdd.Lastname;
+                // newUser.Phonenumber = UserToAdd.Phonenumber;
 
                 _context.Add(newUser);
 
