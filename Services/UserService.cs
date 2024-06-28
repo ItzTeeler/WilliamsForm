@@ -23,6 +23,11 @@ namespace BackendRedo.Services
             _context = context;
         }
 
+        public IEnumerable<UserModel> GetAllUsers()
+        {
+            return _context.FormInfo;
+        }
+
         public bool DoesUserExist(string Email)
         {
             return _context.FormInfo.SingleOrDefault(user => user.Email == Email) != null;
@@ -34,7 +39,7 @@ namespace BackendRedo.Services
 
             if (!DoesUserExist(UserToAdd.Email))
             {
-                FormModel newUser = new FormModel();
+                UserModel newUser = new UserModel();
 
                 var hashPassword = HashPassword(UserToAdd.Password);
 
@@ -42,12 +47,6 @@ namespace BackendRedo.Services
                 newUser.Email = UserToAdd.Email;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
-                
-                // newUser.Address = UserToAdd.Address;
-                // newUser.DOB = UserToAdd.DOB;
-                // newUser.Firstname = UserToAdd.Firstname;
-                // newUser.Lastname = UserToAdd.Lastname;
-                // newUser.Phonenumber = UserToAdd.Phonenumber;
 
                 _context.Add(newUser);
 
@@ -95,7 +94,7 @@ namespace BackendRedo.Services
 
             if (DoesUserExist(User.Email))
             {
-                FormModel foundUser = GetUserByEmail(User.Email);
+                UserModel foundUser = GetUserByEmail(User.Email);
                 if (VerifyUsersPassword(User.Password, foundUser.Hash, foundUser.Salt))
                 {
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
@@ -118,28 +117,28 @@ namespace BackendRedo.Services
             return Result;
         }
 
-        public FormModel GetUserByEmail(string Email)
+        public UserModel GetUserByEmail(string Email)
         {
             return _context.FormInfo.SingleOrDefault(user => user.Email == Email);
         }
 
-        public bool UpdateUser(FormModel userToUpdate)
+        public bool UpdateUser(UserModel userToUpdate)
         {
-            _context.Update<FormModel>(userToUpdate);
+            _context.Update<UserModel>(userToUpdate);
 
             return _context.SaveChanges() != 0;
         }
 
         public bool UpdateEmail(int id, string email)
         {
-            FormModel foundUser = GetUserById(id);
+            UserModel foundUser = GetUserById(id);
 
             bool result = false;
 
             if (foundUser != null)
             {
                 foundUser.Email = email;
-                _context.Update<FormModel>(foundUser);
+                _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
             return result;
@@ -147,7 +146,7 @@ namespace BackendRedo.Services
 
         public bool ForgotPassword(string email, string password)
         {
-            FormModel foundUser = GetUserByEmail(email);
+            UserModel foundUser = GetUserByEmail(email);
 
             var newPassword = HashPassword(password);
 
@@ -157,26 +156,26 @@ namespace BackendRedo.Services
             {
                 foundUser.Salt = newPassword.Salt;
                 foundUser.Hash = newPassword.Hash;
-                _context.Update<FormModel>(foundUser);
+                _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
             return result;
         }
 
-        public FormModel GetUserById(int id)
+        public UserModel GetUserById(int id)
         {
             return _context.FormInfo.SingleOrDefault(user => user.ID == id);
         }
 
         public bool DeleteUser(string userToDelete)
         {
-            FormModel foundUser = GetUserByEmail(userToDelete);
+            UserModel foundUser = GetUserByEmail(userToDelete);
 
             bool result = false;
 
             if (foundUser != null)
             {
-                _context.Remove<FormModel>(foundUser);
+                _context.Remove<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
             return result;
@@ -186,7 +185,7 @@ namespace BackendRedo.Services
         {
             UserIdDTO FormInfo = new UserIdDTO();
 
-            FormModel foundUser = _context.FormInfo.SingleOrDefault(user => user.Email == email);
+            UserModel foundUser = _context.FormInfo.SingleOrDefault(user => user.Email == email);
 
             FormInfo.UserId = foundUser.ID;
 

@@ -1,7 +1,7 @@
 namespace BackendRedo.Models;
 
 // Think of this as the User Model
-    public class FormModel
+    public class UserModel
     {
         public int ID { get; set; }
         public string? Firstname { get; set; }
@@ -12,9 +12,10 @@ namespace BackendRedo.Models;
         public string? Hash { get; set; }
         public string? Email{ get; set; }
         public string? DOB{ get; set; }
+        public bool? isAdmin { get; set; }
         
 
-        public FormModel()
+        public UserModel()
         {
             
         }

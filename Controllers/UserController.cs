@@ -20,6 +20,12 @@ namespace BackendRedo.Controllers
             _data = data;
         }
 
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public IEnumerable<UserModel> GetAllUsers (){
+            return _data.GetAllUsers();
+        }
+
         [HttpPost]
         [Route("Login")]
         public IActionResult Login([FromBody] LoginDTO User)
@@ -36,7 +42,7 @@ namespace BackendRedo.Controllers
 
         [HttpPut]
         [Route("UpdateUser")]
-        public bool UpdateUser(FormModel userToUpdate)
+        public bool UpdateUser(UserModel userToUpdate)
         {
             return _data.UpdateUser(userToUpdate);
         }
