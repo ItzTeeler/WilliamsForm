@@ -177,7 +177,8 @@ namespace BackendRedo.Services
 
             if (foundUser != null)
             {
-                _context.Remove<UserModel>(foundUser);
+                foundUser.isDeleted = true;
+                _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
             return result;

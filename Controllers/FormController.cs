@@ -32,7 +32,7 @@ namespace BackendRedo.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateUser")]
+        [Route("UpdateForm")]
         public bool UpdateForm(FormModel formToUpdate)
         {
             return _data.UpdateForm(formToUpdate);

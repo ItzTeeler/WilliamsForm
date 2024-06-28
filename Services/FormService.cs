@@ -46,7 +46,8 @@ namespace BackendRedo.Services
 
             if (foundForm != null)
             {
-                _context.Remove<FormModel>(foundForm);
+                foundForm.isDeleted = true;
+                _context.Update<FormModel>(foundForm);
                 result = _context.SaveChanges() != 0;
             }
             return result;
