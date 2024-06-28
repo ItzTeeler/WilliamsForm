@@ -10,10 +10,10 @@ namespace BackendRedo.Models.DTO
         public int ID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string DOB { get; set; }
-        public bool isAdmin { get; set; }
+        public bool IsAdmin { get; set; }
         
     }
 }

@@ -23,7 +23,7 @@ namespace BackendRedo.Services
 
         public IEnumerable<FormModel> GetAllForms()
         {
-            return _context.FormInfo.Where(form => form.isDeleted == false);
+            return _context.FormInfo.Where(form => form.IsDeleted == false);
         }
 
         public bool UpdateForm(FormModel formToUpdate)
@@ -46,7 +46,7 @@ namespace BackendRedo.Services
 
             if (foundForm != null)
             {
-                foundForm.isDeleted = true;
+                foundForm.IsDeleted = true;
                 _context.Update<FormModel>(foundForm);
                 result = _context.SaveChanges() != 0;
             }

@@ -29,10 +29,10 @@ namespace BackendRedo.Services
             {
                 ID = userModel.ID,
                 Email = userModel.Email,
-                isAdmin = userModel.isAdmin,
-                isDeleted = userModel.isDeleted,
-                Firstname = userModel.Firstname,
-                Lastname = userModel.Lastname,
+                IsAdmin = userModel.IsAdmin,
+                IsDeleted = userModel.IsDeleted,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
                 DOB = userModel.DOB
 
             };
@@ -40,7 +40,7 @@ namespace BackendRedo.Services
 
         public IEnumerable<UpdateAccountDTO> GetAllUsers()
         {
-            IEnumerable<UserModel> users = _context.UserInfo.Where(user => user.isDeleted == false);
+            IEnumerable<UserModel> users = _context.UserInfo.Where(user => user.IsDeleted == false);
             return users.Select(user => Converter(user)).ToList();
             
         }
@@ -64,11 +64,11 @@ namespace BackendRedo.Services
                 newUser.Email = UserToAdd.Email;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
-                newUser.isAdmin = UserToAdd.isAdmin;
-                newUser.Firstname = UserToAdd.Firstname;
-                newUser.Lastname = UserToAdd.Lastname;
+                newUser.IsAdmin = UserToAdd.IsAdmin;
+                newUser.FirstName = UserToAdd.FirstName;
+                newUser.LastName = UserToAdd.LastName;
                 newUser.DOB = UserToAdd.DOB;
-                newUser.isDeleted = false;
+                newUser.IsDeleted = false;
 
                 _context.Add(newUser);
 
@@ -133,7 +133,7 @@ namespace BackendRedo.Services
 
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-                    Result = Ok(new { Token = tokenString, ID = foundUser.ID, isAdmin = foundUser.isAdmin });
+                    Result = Ok(new { Token = tokenString, ID = foundUser.ID, IsAdmin = foundUser.IsAdmin });
                 }
             }
             return Result;
@@ -154,10 +154,10 @@ namespace BackendRedo.Services
             {
                 foundUser.ID = userToUpdate.ID;
                 foundUser.Email = userToUpdate.Email;
-                foundUser.isAdmin = userToUpdate.isAdmin;
-                foundUser.isDeleted = userToUpdate.isDeleted;
-                foundUser.Firstname = userToUpdate.Firstname;
-                foundUser.Lastname = userToUpdate.Lastname;
+                foundUser.IsAdmin = userToUpdate.IsAdmin;
+                foundUser.IsDeleted = userToUpdate.IsDeleted;
+                foundUser.FirstName = userToUpdate.FirstName;
+                foundUser.LastName = userToUpdate.LastName;
                 foundUser.DOB = userToUpdate.DOB;
                 _context.Update<UserModel>(foundUser);
 
@@ -213,7 +213,7 @@ namespace BackendRedo.Services
 
             if (foundUser != null)
             {
-                foundUser.isDeleted = true;
+                foundUser.IsDeleted = true;
                 _context.Update<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }
