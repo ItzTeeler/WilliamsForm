@@ -22,7 +22,7 @@ namespace BackendRedo.Controllers
 
         [HttpGet]
         [Route("GetAllUsers")]
-        public IEnumerable<UserModel> GetAllUsers (){
+        public IEnumerable<UpdateAccountDTO> GetAllUsers (){
             return _data.GetAllUsers();
         }
 
@@ -42,7 +42,7 @@ namespace BackendRedo.Controllers
 
         [HttpPut]
         [Route("UpdateUser")]
-        public bool UpdateUser(UserModel userToUpdate)
+        public bool UpdateUser(UpdateAccountDTO userToUpdate)
         {
             return _data.UpdateUser(userToUpdate);
         }

@@ -23,9 +23,26 @@ namespace BackendRedo.Services
             _context = context;
         }
 
-        public IEnumerable<UserModel> GetAllUsers()
+        public UpdateAccountDTO Converter(UserModel userModel)
         {
-            return _context.UserInfo.Where(user => user.isDeleted == false);
+            return new UpdateAccountDTO()
+            {
+                ID = userModel.ID,
+                Email = userModel.Email,
+                isAdmin = userModel.isAdmin,
+                isDeleted = userModel.isDeleted,
+                Firstname = userModel.Firstname,
+                Lastname = userModel.Lastname,
+                DOB = userModel.DOB
+
+            };
+        }
+
+        public IEnumerable<UpdateAccountDTO> GetAllUsers()
+        {
+            IEnumerable<UserModel> users = _context.UserInfo.Where(user => user.isDeleted == false);
+            return users.Select(user => Converter(user)).ToList();
+            
         }
 
         public bool DoesUserExist(string Email)
@@ -48,6 +65,9 @@ namespace BackendRedo.Services
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
                 newUser.isAdmin = UserToAdd.isAdmin;
+                newUser.Firstname = UserToAdd.Firstname;
+                newUser.Lastname = UserToAdd.Lastname;
+                newUser.DOB = UserToAdd.DOB;
                 newUser.isDeleted = false;
 
                 _context.Add(newUser);
@@ -124,11 +144,27 @@ namespace BackendRedo.Services
             return _context.UserInfo.SingleOrDefault(user => user.Email == Email);
         }
 
-        public bool UpdateUser(UserModel userToUpdate)
+        public bool UpdateUser(UpdateAccountDTO userToUpdate)
         {
-            _context.Update<UserModel>(userToUpdate);
+            var foundUser = GetUserByEmail(userToUpdate.Email);
 
-            return _context.SaveChanges() != 0;
+            bool result = false;
+
+            if (foundUser != null)
+            {
+                foundUser.ID = userToUpdate.ID;
+                foundUser.Email = userToUpdate.Email;
+                foundUser.isAdmin = userToUpdate.isAdmin;
+                foundUser.isDeleted = userToUpdate.isDeleted;
+                foundUser.Firstname = userToUpdate.Firstname;
+                foundUser.Lastname = userToUpdate.Lastname;
+                foundUser.DOB = userToUpdate.DOB;
+                _context.Update<UserModel>(foundUser);
+
+                result = _context.SaveChanges() != 0;
+            }
+
+            return result;
         }
 
         public bool UpdateEmail(int id, string email)
