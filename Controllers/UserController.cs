@@ -62,17 +62,17 @@ namespace BackendRedo.Controllers
         }
 
         [HttpPut]
-        [Route("ForgotPassword/{email}/{password}")]
-        public bool ForgotPassword(string email, string password)
+        [Route("ResetPassword/{email}/{password}")]
+        public bool ResetPassword(string email, string password)
         {
-            return _data.ForgotPassword(email, password);
+            return _data.ResetPassword(email, password);
         }
 
         [HttpDelete]
-        [Route("DeleteUser/{userToDelete}")]
-        public bool DeleteUser(string userToDelete)
+        [Route("DeleteUserByEmail/{userToDelete}")]
+        public bool DeleteUserByEmail(string userToDelete)
         {
-            return _data.DeleteUser(userToDelete);
+            return _data.DeleteUserByEmail(userToDelete);
         }
     }
 }

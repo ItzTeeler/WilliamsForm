@@ -25,12 +25,12 @@ namespace BackendRedo.Services
 
         public IEnumerable<UserModel> GetAllUsers()
         {
-            return _context.FormInfo;
+            return _context.UserInfo.Where(user => user.isDeleted == false);
         }
 
         public bool DoesUserExist(string Email)
         {
-            return _context.FormInfo.SingleOrDefault(user => user.Email == Email) != null;
+            return _context.UserInfo.SingleOrDefault(user => user.Email == Email) != null;
         }
 
         public bool AddUser(CreateAccountDTO UserToAdd)
@@ -47,6 +47,8 @@ namespace BackendRedo.Services
                 newUser.Email = UserToAdd.Email;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
+                newUser.isAdmin = UserToAdd.isAdmin;
+                newUser.isDeleted = false;
 
                 _context.Add(newUser);
 
@@ -111,7 +113,7 @@ namespace BackendRedo.Services
 
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-                    Result = Ok(new { Token = tokenString });
+                    Result = Ok(new { Token = tokenString, ID = foundUser.ID, isAdmin = foundUser.isAdmin });
                 }
             }
             return Result;
@@ -119,7 +121,7 @@ namespace BackendRedo.Services
 
         public UserModel GetUserByEmail(string Email)
         {
-            return _context.FormInfo.SingleOrDefault(user => user.Email == Email);
+            return _context.UserInfo.SingleOrDefault(user => user.Email == Email);
         }
 
         public bool UpdateUser(UserModel userToUpdate)
@@ -144,7 +146,7 @@ namespace BackendRedo.Services
             return result;
         }
 
-        public bool ForgotPassword(string email, string password)
+        public bool ResetPassword(string email, string password)
         {
             UserModel foundUser = GetUserByEmail(email);
 
@@ -164,10 +166,10 @@ namespace BackendRedo.Services
 
         public UserModel GetUserById(int id)
         {
-            return _context.FormInfo.SingleOrDefault(user => user.ID == id);
+            return _context.UserInfo.SingleOrDefault(user => user.ID == id);
         }
 
-        public bool DeleteUser(string userToDelete)
+        public bool DeleteUserByEmail(string userToDelete)
         {
             UserModel foundUser = GetUserByEmail(userToDelete);
 
@@ -183,15 +185,15 @@ namespace BackendRedo.Services
 
         public UserIdDTO GetUserIdDTOByEmail(string email)
         {
-            UserIdDTO FormInfo = new UserIdDTO();
+            UserIdDTO UserInfo = new UserIdDTO();
 
-            UserModel foundUser = _context.FormInfo.SingleOrDefault(user => user.Email == email);
+            UserModel foundUser = _context.UserInfo.SingleOrDefault(user => user.Email == email);
 
-            FormInfo.UserId = foundUser.ID;
+            UserInfo.UserId = foundUser.ID;
 
-            FormInfo.Email = foundUser.Email;
+            UserInfo.Email = foundUser.Email;
 
-            return FormInfo;
+            return UserInfo;
         }
     }
 }

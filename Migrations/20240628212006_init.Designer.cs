@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendRedo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240628174814_init")]
+    [Migration("20240628212006_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace BackendRedo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BackendRedo.Models.UserModel", b =>
+            modelBuilder.Entity("BackendRedo.Models.FormModel", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -45,13 +45,32 @@ namespace BackendRedo.Migrations
                     b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Hash")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phonenumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FormInfo");
+                });
+
+            modelBuilder.Entity("BackendRedo.Models.UserModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")
@@ -60,9 +79,12 @@ namespace BackendRedo.Migrations
                     b.Property<bool?>("isAdmin")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
-                    b.ToTable("FormInfo");
+                    b.ToTable("UserInfo");
                 });
 #pragma warning restore 612, 618
         }
