@@ -146,7 +146,7 @@ namespace BackendRedo.Services
 
         public bool UpdateUser(UpdateAccountDTO userToUpdate)
         {
-            var foundUser = GetUserByEmail(userToUpdate.Email);
+            var foundUser = GetUserById(userToUpdate.ID);
 
             bool result = false;
 
