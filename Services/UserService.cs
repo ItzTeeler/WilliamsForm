@@ -154,7 +154,6 @@ namespace BackendRedo.Services
             {
                 foundUser.ID = userToUpdate.ID;
                 foundUser.Email = userToUpdate.Email;
-                foundUser.IsAdmin = userToUpdate.IsAdmin;
                 foundUser.IsDeleted = userToUpdate.IsDeleted;
                 foundUser.FirstName = userToUpdate.FirstName;
                 foundUser.LastName = userToUpdate.LastName;
