@@ -22,7 +22,8 @@ namespace BackendRedo.Controllers
 
         [HttpGet]
         [Route("GetAllUsers")]
-        public IEnumerable<UpdateAccountDTO> GetAllUsers (){
+         public IEnumerable<GetAccountDTO> GetAllUsers ()
+        {
             return _data.GetAllUsers();
         }
 

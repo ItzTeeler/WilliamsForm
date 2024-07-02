@@ -23,9 +23,9 @@ namespace BackendRedo.Services
             _context = context;
         }
 
-        public UpdateAccountDTO Converter(UserModel userModel)
+        public GetAccountDTO Converter(UserModel userModel)
         {
-            return new UpdateAccountDTO()
+            return new GetAccountDTO()
             {
                 ID = userModel.ID,
                 Email = userModel.Email,
@@ -38,7 +38,7 @@ namespace BackendRedo.Services
             };
         }
 
-        public IEnumerable<UpdateAccountDTO> GetAllUsers()
+        public IEnumerable<GetAccountDTO> GetAllUsers()
         {
             IEnumerable<UserModel> users = _context.UserInfo.Where(user => user.IsDeleted == false);
             return users.Select(user => Converter(user)).ToList();
